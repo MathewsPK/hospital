@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}
+Appointment
+{% endblock %}
+{% block content %}
+    {% load static %}
+    <section class="appointment">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>We Are Always Ready to Help You. Book An Appointment</h2>
+                        <img src="{% static "img/section-img.png" %}" alt="{#}">
+                        <p>" To give life abundantly "</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12">
+                    <form class="form" method="post" action="{% url 'Appointment' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input name="p_name" type="text" placeholder="Name" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input name="p_email" type="email" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input name="p_phone" type="text" placeholder="Phone" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <select name="p_doc" class="nice-select form-control wide" required>
+                                        <option value="" disabled selected>Doctor</option>
+                                        {% for d in doc %}
+                                            <option value="{{ d.id }}">Dr {{ d.doc_name }} - ({{d.doc_dept}})</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <input type="text" name="p_date" placeholder="Date" id="datepicker" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="form-group">
+                                    <textarea name="p_msg" placeholder="Write Your Message Here....." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-5 col-md-4 col-12">
+                                <div class="form-group">
+                                    <div class="button">
+                                        <button type="submit" class="btn">Book An Appointment</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-8 col-12">
+                                <p>(We will confirm by a text message)</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-12 ">
+                    <div class="appointment-image">
+                        <img src="{% static "img/contact-img.png" %}" alt="#">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
